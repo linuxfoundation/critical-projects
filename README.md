@@ -33,14 +33,11 @@ Using the [OpenSSF Criticality Scores](https://openssf.org/projects/criticality-
 
 ## What does it mean for a project to be "critical"?
 
-An open source project is "critical" if
-
-1.  it is either directly relied on by many users or indirectly through other widely-used projects that depend on it.
-2.  in the event that a critical security vulnerability were found and exploited, it could cause catastrophic damage (economic, societal, human life, safety, etc.).
+Definition: An open source project is "critical" if it is either directly relied on by many users or indirectly through other widely-used projects that depend on it.
 
 # Methodology
 
-Our aproach consists of three main steps:
+Our approach consists of three main steps:
 
 1. [Project discovery and filtering](#project-discovery-and-filtering)
 2. [Measure signals of criticality](#measure-signals-of-criticality)
@@ -51,12 +48,12 @@ Our aproach consists of three main steps:
 The universe of open source projects is too broad, so we need to pare this down a bit before even beginning to rank. Let's define the unit of analysis for an open source project as the project's canonical source code repository. Our approach to project discovery and filtering is as follows:
 
 1. Use git-based projects with public source repositories on GitHub
-2. Use GitHub GraphQL to return a list of the top 10,000 most starred public repositories older than 6 months. We additionally include the OpenSSF Securing Critical Projects list of "most critical projects" to this set.
-3. Filter this set to exclude forks, mirrors, templates, archived repositories.
+2. Use GitHub GraphQL to return a list of the top 10,000 most-starred public repositories older than 6 months. We additionally include the OpenSSF Securing Critical Projects list of "most critical projects" in this set.
+3. Filter this set to exclude forks, mirrors, templates, and archived repositories.
 
 ## Measure signals of criticality
 
-For each project in the set of  projects, we next gather a number of quantitivative signals that can be derived from project characteristics. Signals should measure something about the project that reasonably correlates with a notion of criticality.
+For each project in the set of  projects, we next gather a number of quantitative signals that can be derived from project characteristics. Signals should measure something about the project that reasonably correlates with a notion of criticality.
 
 **Examples:**
 
@@ -119,8 +116,8 @@ Some remarks on the choice of signals and parameters:
 
 # Limitations
 
-1. **VCS and DVCS platform specific (git and GitHub)** - Coming up with a set of signals that can be consistently measured across different platforms is a challenge. For example, using platform-specific signals like "number of forks" or "number of stars" is not possible for projects that are not hosted on GitHub. To accommodate this, we can use a set of signals that are more general and can be measured across different platforms. The signals we've chosen so far are based purely on the version control log of the open source project.
-2. **Dependency information is not included** - A related issue of observability is that dependency information (which projects rely on others) can be hard to consistently gather. While SBOMs or packaging manifests do a decent job of recording runtime dependencies and other external artifacts a project relies upon, nuanced and potentially more important dependency relationships are imperfectly observed. For example, container technologies like Docker and Kubernetes rely heavily on the Linux kernel but neither directly "declare" the kernel as an import in packaging manifest.
+1. **VCS and DVCS platform-specific (git and GitHub)** - Coming up with a set of signals that can be consistently measured across different platforms is a challenge. For example, using platform-specific signals like "number of forks" or "number of stars" is not possible for projects that are not hosted on GitHub. To accommodate this, we can use a set of signals that are more general and can be measured across different platforms. The signals we've chosen so far are based purely on the version control log of the open source project.
+2. **Dependency information is not included** - A related issue of observability is that dependency information (which projects rely on others) can be hard to consistently gather. While SBOMs or packaging manifests do a decent job of recording runtime dependencies and other external artifacts a project relies upon, nuanced and potentially more important dependency relationships are imperfectly observed. For example, container technologies like Docker and Kubernetes rely heavily on the Linux kernel, but neither directly "declare" the kernel as an import in packaging manifest.
 
 # Future iterations
 
